@@ -1,0 +1,28 @@
+name: CodeQuality
+
+on:
+  push:
+  pull_request:
+  
+jobs:
+  coveralls:
+    runs-on: ubuntu-latest
+      
+    strategy:
+      fail-fast: true
+        
+    name: PHP
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+        
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with: 
+          php-version: 8.1
+          tools: composer
+          coverage: xdebug
+      
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v2
